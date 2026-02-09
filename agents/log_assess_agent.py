@@ -2,7 +2,7 @@
 import os
 import openai
 
-def analyze_log_pattern(log_text, model="gpt-3.5-turbo", api_key=None):
+def assess_log(log_text, model="gpt-3.5-turbo", api_key=None):
 	"""
 	Accepts log text, calls LLM, and returns structured output.
 	Args:
@@ -19,7 +19,7 @@ def analyze_log_pattern(log_text, model="gpt-3.5-turbo", api_key=None):
 	openai.api_key = api_key
 
 	prompt = (
-		"You are a log analysis agent. Given the following log text, extract structured information such as "
+		"You are a log assessment agent. Given the following log text, extract structured information such as "
 		"timestamp, log level, component, message, and any detected error or warning patterns. "
 		"Return the result as a JSON object with a list of log entries and a summary of detected issues.\n\n"
 		f"Log text:\n{log_text}\n"
@@ -27,7 +27,7 @@ def analyze_log_pattern(log_text, model="gpt-3.5-turbo", api_key=None):
 
 	response = openai.ChatCompletion.create(
 		model=model,
-		messages=[{"role": "system", "content": "You are a helpful log analysis assistant."},
+		messages=[{"role": "system", "content": "You are a helpful log assessment assistant."},
 				 {"role": "user", "content": prompt}],
 		temperature=0.2,
 		max_tokens=800
