@@ -1,4 +1,3 @@
-# import required modules
 import os
 import openai
 
